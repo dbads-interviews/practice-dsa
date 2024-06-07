@@ -1,0 +1,26 @@
+
+graph = {
+    1: [2, 3],
+    2: [4, 5],
+    3: [6],
+    4: [],
+    5: [],
+    6: []
+}
+
+
+def dfs(graph, start, visited=None):
+    if not visited:
+        visited = set()
+    
+    visited.add(start)
+    print(start)
+    
+    for neighbour in graph[start]:
+        if not neighbour in visited:
+            dfs(graph, neighbour, visited)
+    
+    return visited
+
+print(dfs(graph, 1))
+
