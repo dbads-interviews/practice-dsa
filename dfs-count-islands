@@ -1,0 +1,38 @@
+grid = [
+    ["1","1","0","0","0"],
+    ["1","1","0","0","0"],
+    ["0","0","1","0","0"],
+    ["0","0","0","1","1"]
+]
+
+
+def visit_neighbours(i,j,grid,visited):
+    r=len(grid)
+    c=len(grid[0])
+
+    if i<0 or j<0 or i>=r or j>=c or grid[i][j] == "0" or visited[i][j]: return
+    visited[i][j]=True
+    visit_neighbours(i,j+1,grid,visited)
+    visit_neighbours(i+1,j,grid,visited)
+    visit_neighbours(i,j-1,grid,visited)
+    visit_neighbours(i-1,j,grid,visited)
+    
+
+def numIsLands(grid):
+    if not grid: return 0
+    
+    r=len(grid)
+    c=len(grid[0])
+    
+    visited = [[False for _ in range(c)] for _ in range(r)]
+    islandscount = 0
+    
+    for i in range(r):
+        for j in range(c):
+            if grid[i][j] == "1" and not visited[i][j]:
+                islandscount += 1
+                visit_neighbours(i,j,grid,visited)
+                
+    return islandscount
+    
+print(numIsLands(grid))
